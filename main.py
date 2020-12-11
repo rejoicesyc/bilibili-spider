@@ -12,7 +12,7 @@ def set_task():
 
 if __name__=="__main__":
     start_time=time.time()
-    set_task()
+    # set_task()
 
     biliSpider=BiliSpider()
     biliSpider.run()

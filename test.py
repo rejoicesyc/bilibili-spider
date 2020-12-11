@@ -1,4 +1,9 @@
 from DecryptLogin import login
+import pandas as pd 
+
+df=pd.read_csv('./csv_result/csv_result0.csv')
+print(df.info())
+exit()
 
 lg = login.Login()
 infos_return, session = lg.bilibili("19921308726", "syc991112")

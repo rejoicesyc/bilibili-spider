@@ -9,7 +9,7 @@ from DecryptLogin import login
 from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
 
 from fakeUaPool import FakeUaPool
-from db import DB
+# from db import DB
 from config import *
 
 # TODO: 1.get fake cookie to speed up spider
@@ -21,7 +21,7 @@ class BiliSpider:
         self.reply_url_root=reply_url_root
 
         self.uaPool=FakeUaPool(ua_pool)
-        self.db=DB("bilibili","data")
+        # self.db=DB("bilibili","data")
 
         self.ua_freq=ua_freq
         self.login_freq=login_freq
@@ -90,7 +90,7 @@ class BiliSpider:
             if data['code']==0:
                 return data['data']
             else:
-                return None
+                return -1
         except:
             print(data)
             traceback.print_exc()
@@ -151,7 +151,7 @@ class BiliSpider:
         try:
             with open(self.csv_file_path+"csv_result{}.csv".format(str(task_index)),'a+',encoding='utf-8') as f:
                 writer=csv.writer(f)
-                entry=html+[
+                entry=list(html)+[
                     data['aid'],
                     data['view'],
                     data['danmaku'],
@@ -182,7 +182,7 @@ class BiliSpider:
             'coin':data['coin'],
             'share':data['share'],
             'like':data['like'],
-            'reply':reply
+            'replys':reply
         })
 
     def sub_task(self,task_index,begin,end):
@@ -220,9 +220,10 @@ class BiliSpider:
                         # print(html)
                         # print(data)
                         # print(reply)
-                        # self.write_csv(task_index,html,reply,data)
-                        self.insert_db(html,reply,data)
+                        self.write_csv(task_index,html,reply,data)
+                        # self.insert_db(html,reply,data)
                 else:
+                    print("\033[1;31manti spider.\033[0m")
                     break
 
                 av+=1
