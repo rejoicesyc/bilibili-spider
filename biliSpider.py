@@ -202,8 +202,8 @@ class BiliSpider:
                     user_agent=self.uaPool.get_random_ua()
                     print("\033[1;33mchange ua : {}\033[0m".format(user_agent))
 
-                if av%self.login_freq==0:
-                    self.bili_login()
+                # if av%self.login_freq==0:
+                #     self.bili_login()
 
                 headers={'user-agent':user_agent}
                 # headers={'user-agent ':"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15"}
