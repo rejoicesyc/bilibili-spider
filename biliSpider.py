@@ -5,6 +5,7 @@ import json
 import sys
 import csv
 import traceback
+import random
 from DecryptLogin import login
 from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
 
@@ -90,6 +91,7 @@ class BiliSpider:
             if data['code']==0:
                 return data['data']
             else:
+                print(data)
                 return -1
         except:
             print(data)
@@ -152,14 +154,14 @@ class BiliSpider:
             with open(self.csv_file_path+"csv_result{}.csv".format(str(task_index)),'a+',encoding='utf-8') as f:
                 writer=csv.writer(f)
                 entry=list(html)+[
-                    data['aid'],
-                    data['view'],
-                    data['danmaku'],
-                    data['reply'],
-                    data['favorite'],
-                    data['coin'],
-                    data['share'],
-                    data['like']
+                    # data['aid'],
+                    # data['view'],
+                    # data['danmaku'],
+                    # data['reply'],
+                    # data['favorite'],
+                    # data['coin'],
+                    # data['share'],
+                    # data['like']
                 ]
                 if reply:
                     entry.append(reply)
@@ -174,14 +176,14 @@ class BiliSpider:
             "tag":html[2],
             "discreption":html[3],
             "rel_title":html[4],
-            'aid':data['aid'],
-            'view':data['view'],
-            'danmaku':data['danmaku'],
-            'reply':data['reply'],
-            'favorite':data['favorite'],
-            'coin':data['coin'],
-            'share':data['share'],
-            'like':data['like'],
+            # 'aid':data['aid'],
+            # 'view':data['view'],
+            # 'danmaku':data['danmaku'],
+            # 'reply':data['reply'],
+            # 'favorite':data['favorite'],
+            # 'coin':data['coin'],
+            # 'share':data['share'],
+            # 'like':data['like'],
             'replys':reply
         })
 
@@ -209,7 +211,9 @@ class BiliSpider:
                 # headers={'user-agent ':"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15"}
 
                 html=self.get_html(av,headers)
-                data=self.get_data(av,headers)
+                time.sleep(random.uniform(3.0,5.0))
+                # data=self.get_data(av,headers)
+                # time.sleep(random.uniform(0.5,1.0))
                 reply=self.get_reply(av,headers)
 
                 spider_result=[html,data,reply]
