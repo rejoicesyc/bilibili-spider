@@ -34,11 +34,6 @@ class BiliSpider:
 
         self.execute=True
 
-    def bili_login(self):
-        lg = login.Login()
-        infos_return, session = lg.bilibili("19921308726", "syc991112")
-        return session
-
     def get_html(self,av,headers):
         url=self.title_url_root.format(str(av))
 
