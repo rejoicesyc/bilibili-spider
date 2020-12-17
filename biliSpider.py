@@ -13,8 +13,6 @@ from fakeUaPool import FakeUaPool
 # from db import DB
 from config import *
 
-# TODO: 1.get fake cookie to speed up spider
-
 class BiliSpider:
     def __init__(self):
         self.data_url_root=data_url_root
